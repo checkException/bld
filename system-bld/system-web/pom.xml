@@ -8,7 +8,7 @@
 		<version>2.2.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bld</groupId>
+	<groupId>com.bld.system</groupId>
 	<artifactId>system-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>system</name>
@@ -21,7 +21,7 @@
 
 	<dependencies>
         <dependency>
-            <groupId>com.bld</groupId>
+            <groupId>com.bld.system</groupId>
             <artifactId>system-service</artifactId>
             <version>${system-service.version}</version>
         </dependency>

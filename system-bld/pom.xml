@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.bld</groupId>
+	<groupId>com.bld.system</groupId>
 	<artifactId>system-bld</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>system-bld</name>
@@ -18,5 +18,26 @@
     <modules>
         <module>system-web</module>
         <module>system-service</module>
+        <module>system-dao</module>
     </modules>
+
+    <!--引入jar包-->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 </project>

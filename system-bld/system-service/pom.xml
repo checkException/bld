@@ -8,7 +8,7 @@
 		<version>2.2.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bld</groupId>
+	<groupId>com.bld.system</groupId>
 	<artifactId>system-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>system</name>
@@ -16,9 +16,16 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<system-dao.version>0.0.1-SNAPSHOT</system-dao.version>
 	</properties>
 
 	<dependencies>
+        <dependency>
+            <groupId>com.bld.system</groupId>
+            <artifactId>system-dao</artifactId>
+            <version>${system-dao.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
