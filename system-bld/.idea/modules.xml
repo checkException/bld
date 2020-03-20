@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bld-service/bld-service.iml" filepath="$PROJECT_DIR$/bld-service/bld-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bld-web/bld-web.iml" filepath="$PROJECT_DIR$/bld-web/bld-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/system-bld.iml" filepath="$PROJECT_DIR$/system-bld.iml" />
+    </modules>
+  </component>
+</project>
