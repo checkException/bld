@@ -1,0 +1,164 @@
+.chs-tip {
+    position: absolute;
+    top: 280px;
+    left: 40%;
+    width: 543px;
+    height: 301px;
+    background: url("../images/common/box_bg.gif") no-repeat;
+    width: 361px;
+    height: 202px;
+    font-size: 24px;
+    z-index: 10000;
+    visibility: hidden;
+}
+
+.chs-tip-title {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.chs-tip-content {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    padding-top: 10px;
+}
+
+.qijin-navbar{
+    background: white;
+    color: black;
+}
+.upload-box-div{
+    /*width: 122px;
+    height: 122px;*/
+    /*background: url(images/bg.png) no-repeat;*/
+    text-align: center;
+    margin: 0 8px 20px 0;
+    position: relative;
+    display: inline;
+    float: left;
+    overflow: hidden;
+    font-size: 12px;
+}
+.upload-box-div .on-div{
+    height: 30px;
+}
+.upload-btn-div{
+    height: 0;
+    position: absolute;
+    background: rgba( 0, 0, 0, 0.5 );
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 300;
+}
+.upload-btn-div span{
+    width: 24px;
+    height: 24px;
+    display: inline;
+    float: right;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../images/common/uploadicons.png) no-repeat;
+    margin: 5px 1px 1px;
+    cursor: pointer;
+    z-index: 1;
+}
+.upload-btn-div .img-cancel{
+    background-position: -48px -24px;
+}
+.text-width40px{
+    box-sizing: border-box;
+    border: solid 1px #ddd;
+    width: 40px;
+    font-size: 14px;
+    height: 40px;
+    line-height: 1.42857;
+    padding: 4px;
+    transition: all .2s linear 0s;
+}
+.text-width10{
+    box-sizing: border-box;
+    border: solid 1px #ddd;
+    width: 10%;
+    font-size: 14px;
+    height: 31px;
+    line-height: 1.42857;
+    padding: 4px;
+    transition: all .2s linear 0s;
+}
+.text-width20{
+    width: 20%;
+}
+.text-width30{
+    width: 30%;
+}
+.text-width50{
+    box-sizing: border-box;
+    border: solid 1px #ddd;
+    width: 50%;
+    font-size: 14px;
+    height: 31px;
+    line-height: 1.42857;
+    padding: 4px;
+    transition: all .2s linear 0s;
+}
+.text-width60{
+    width: 60%;
+}
+.text-width70{
+    width: 70%;
+}
+.td-width40{
+    width: 40px;
+}
+
+upload_img_on{
+    display: block;
+}
+upload_img_hidden{
+    display: none;
+}
+
+
+/*按钮*/
+.btn-auto{
+    display: inline-block;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 400;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: solid 1px #ddd;
+    background-color: #fff;
+    width: auto;
+    transition: background-color .1s linear;
+    font-size:14px;
+    height: 31px;
+}
+.radius-auto {
+    border-radius: 4px;
+}
+
+a.btn-auto:hover,a.btn-auto:focus,a.btn-auto:active,a.btn-auto.active,a.btn-auto.disabled,a.btn-auto[disabled]{text-decoration:none}
+
+.btn-auto:active,.btn-auto.active{background-color:#ccc}
+.btn-auto:first-child{*margin-left:0}
+.btn-auto.active,.btn-auto:active{-moz-box-shadow:0 1px 8px rgba(0, 0, 0, 0.125) inset;-webkit-box-shadow:0 1px 8px rgba(0, 0, 0, 0.125) inset; box-shadow:0 1px 8px rgba(0, 0, 0, 0.125) inset}
+
+
+/*主要——主色	通常用于确定、提交、购买、支付等*/
+.btn-auto-primary{color:#fff;background-color:#5a98de; border-color:#5a98de}
+.btn-auto-default:hover,
+.btn-auto-default:focus,
+.btn-auto-default:active,
+.btn-auto-default.active{
+    color: #fff;
+    background-color: #0a6999;
+    border-color: #0a6999;
+}
