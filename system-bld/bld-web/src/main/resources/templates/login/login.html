@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <span th:include="/common/head :: commonHead('用户登录')"></span>
+    <link th:href="@{/lib/h-ui.admin/css/H-ui.login.css}" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div class="loginWraper">
+    <div id="loginform" class="loginBox">
+        <form class="form form-horizontal" action="index.html" method="post">
+            <div class="row cl">
+                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+                <div class="formControls col-xs-8">
+                    <input id="user_name" name="name" type="text" placeholder="账户" class="input-text size-L"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+                <div class="formControls col-xs-8">
+                    <input id="user_pwd" name="password" type="password" placeholder="密码" class="input-text size-L"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="formControls col-xs-8 col-xs-offset-3">
+                    <input id="verificationcode" class="input-text size-L" type="text" placeholder="验证码" onblur="" onclick="" value="" style="width:150px;"/>
+                    <!--<img id="image_v_code" src="login/verificationCode.do"/> <a id="" href="#">看不清，换一张</a>-->
+                </div>
+            </div>
+            <div class="row cl">
+                <div id="prompt" class="formControls col-xs-8 col-xs-offset-3" >
+
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="formControls col-xs-8 col-xs-offset-3">
+                    <input id="Button_Login-btnInnerEl" name="" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"/>
+                    <input id="Button_Login-btnIconEl" name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<span th:include="/common/footer::footer"></span>
+<script type="text/javascript" >
+
+</script>
+</body>
+</html>

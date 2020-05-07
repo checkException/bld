@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import system.bld.dao.UserDao;
+import system.bld.entiry.UserBean;
 import system.bld.entiry.UserEntity;
 import system.bld.service.UserService;
+
+import java.lang.reflect.Field;
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,4 +48,5 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserEntity> implements 
 		userEntity.setId(id);
 		return userDao.getUserById(userEntity.getId());
 	}
+
 }
