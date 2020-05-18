@@ -32,7 +32,7 @@ public class APIResponse {
 
 
 	public APIResponse fail(){
-		return new APIResponse(9999,"失败",null);
+		return new APIResponse(FAIL,"失败",null);
 	}
 
 	public APIResponse fail(Integer code){
@@ -40,7 +40,7 @@ public class APIResponse {
 	}
 
 	public APIResponse ok(){
-		return new APIResponse(200,"成功",null);
+		return new APIResponse(SUCESS,"成功",null);
 	}
 
 	public APIResponse ok(Integer code){

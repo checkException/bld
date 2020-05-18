@@ -2,7 +2,7 @@ package system.bld.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
-import system.bld.entiry.UserEntity;
+import system.bld.model.UserBase;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,12 +14,12 @@ import system.bld.entiry.UserEntity;
  * Description:
  */
 @Repository
-public interface UserDao extends BaseMapper<UserEntity>{
+public interface UserDao extends BaseMapper<UserBase>{
 
 	/**
 	 * 获取用户信息根据id
 	 * @param id
 	 * @return
 	 */
-	UserEntity getUserById(Integer id);
+	UserBase getUserById(Long id);
 }

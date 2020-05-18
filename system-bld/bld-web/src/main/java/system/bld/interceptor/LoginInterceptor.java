@@ -27,15 +27,15 @@ public class LoginInterceptor implements HandlerInterceptor{
 	/**
 	 * 该方法的执行时机是，当某个 URL 已经匹配到对应的 Controller 中的某个方法，
 	 * 且在这个方法执行之前。所以 preHandle(……) 方法可以决定是否将请求放行，这是通过返回值来决定的，返回 true 则放行，返回 false 则不会向后执行。
-	 * @param httpServletRequest
-	 * @param httpServletResponse
+	 * @param request
+	 * @param response
 	 * @param handler
 	 * @return
 	 * @throws Exception
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler) throws Exception {
-		log.info("LoginInterceptor enter ..... ");
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		log.info("LoginInterceptor enter ..... url:{}",request.getRequestURI());
 
 		if(handler instanceof HandlerMethod){
 			Login login= ((HandlerMethod) handler).getMethodAnnotation(Login.class);
@@ -44,11 +44,16 @@ public class LoginInterceptor implements HandlerInterceptor{
 				//免校验 跳过验证
 				if(login.login()== LoginEnum.Skip){
 					return true;
+				}else {
+					//判断用户是否登录 采用token方式
+
+					log.info(" interceptor 需要校验 ...!");
+					String rootPath=request.getRequestURI().replace(request.getServletPath(),"/login");
+					response.sendRedirect(rootPath);
+					return false;
 				}
 			}
 
-
-			//判断用户是否登录 采用token方式
 		}
 
 

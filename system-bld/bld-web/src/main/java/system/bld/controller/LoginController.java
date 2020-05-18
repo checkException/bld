@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import system.bld.annotations.Login;
-import system.bld.entiry.UserEntity;
 import system.bld.enums.LoginEnum;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 	private static final Logger log= LoggerFactory.getLogger(LoginController.class);
 
-	@Login(login=LoginEnum.Skip)
 	@RequestMapping("")
 	public String home(HttpServletRequest request, Model model){
 		log.info("user login ");

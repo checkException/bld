@@ -3,16 +3,14 @@ package system.bld.service.impl;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import system.bld.dao.UserBaseDao;
 import system.bld.dao.UserDao;
-import system.bld.entiry.UserBean;
-import system.bld.entiry.UserEntity;
+import system.bld.model.UserBase;
 import system.bld.service.UserService;
-
-import java.lang.reflect.Field;
 
 /**
  * Created with IntelliJ IDEA.
- *
+ * 可以继承ServiceImpl   用一些公用方法，也不可以不继承，自己写SQL
  * @Author: LiTao
  * @Date: 2020/3/20
  * @Time: 14:51
@@ -20,10 +18,11 @@ import java.lang.reflect.Field;
  * Description:
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserDao,UserEntity> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserDao,UserBase> implements UserService {
 
 	@Autowired
 	UserDao userDao;
+
 
 	/**
 	 * test service 实现是否生效
@@ -43,10 +42,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserEntity> implements 
 	 * @return
 	 */
 	@Override
-	public UserEntity getUserById(Integer id) {
-		UserEntity userEntity=new UserEntity();
+	public UserBase getUserById(Long id) {
+		UserBase userEntity=new UserBase();
 		userEntity.setId(id);
 		return userDao.getUserById(userEntity.getId());
 	}
+
+
 
 }

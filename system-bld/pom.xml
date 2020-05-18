@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>bld-web</module>
+        <module>bld-api</module>
         <module>bld-service</module>
         <module>bld-common</module>
     </modules>

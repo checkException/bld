@@ -1,6 +1,7 @@
 package system.bld.main;
 
 
+import cn.hutool.core.io.file.FileReader;
 import com.alibaba.fastjson.JSON;
 
 import java.util.Arrays;
@@ -18,6 +19,12 @@ import java.util.List;
 public class createSqlUtil {
 
 	public static void main(String[] args) {
+		//daoruStr();
+
+		daoruTxt();
+	}
+
+	public static  void daoruStr(){
 		String ymStr="72fz.com," +
 				"8aok.cn," +
 				"hxdgzs.com," +
@@ -61,5 +68,19 @@ public class createSqlUtil {
 		}
 
 		System.out.println(sql);
+	}
+
+	public static void daoruTxt(){
+		FileReader fileReader=new FileReader("D:\\waiguaweb.txt");
+		List<String> list= fileReader.readLines();
+		String sql="INSERT INTO `uhaofile`.`uhao_pattern_data` (`pattern_id`, `pattern_type`, `data_len`, `databuffer`, `time`, `is_const`, `reversed`, `virus_wg_type`, `feature_code_type`, `over_time`, `create_time`, `operate_name`, `operate_no`) VALUE ";
+
+		for (String str:list){
+			String sqlStr="('92', '30400', LENGTH('0:2:"+str+"'), '0:2:"+str+"', NOW(), '1', '"+str+"', '2', '0', NOW(), NOW(), 'admin', 'admin');";
+			System.out.println(sql.concat(sqlStr));
+		}
+
+
+		//String keyStr=fileReader.readString();
 	}
 }

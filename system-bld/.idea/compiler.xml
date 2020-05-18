@@ -6,12 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="bld-api" />
         <module name="bld-common" />
         <module name="bld-service" />
         <module name="bld-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="bld-api" target="1.7" />
       <module name="bld-common" target="1.8" />
       <module name="bld-service" target="1.7" />
       <module name="bld-web" target="1.7" />

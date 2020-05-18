@@ -1,7 +1,7 @@
 package system.bld.service;
 
 import com.baomidou.mybatisplus.service.IService;
-import system.bld.entiry.UserEntity;
+import system.bld.model.UserBase;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +12,7 @@ import system.bld.entiry.UserEntity;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-public interface UserService extends IService<UserEntity> {
+public interface UserService extends IService<UserBase> {
 
 	/**
 	 * test service 实现是否生效
@@ -26,6 +26,6 @@ public interface UserService extends IService<UserEntity> {
 	 * @param id
 	 * @return
 	 */
-	UserEntity getUserById(Integer id);
+	UserBase getUserById(Long id);
 
 }
