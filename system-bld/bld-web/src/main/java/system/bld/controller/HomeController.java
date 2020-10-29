@@ -52,15 +52,17 @@ public class HomeController {
 	}
 
 
-	@Login(login= LoginEnum.Normal)
+	@Login(login= LoginEnum.Skip)
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request, String string, Model model){
 
-		UserBase result= userBaseService.queryUserById(1L);
+		UserBase result= userBaseService.queryUserById(2L);
 		log.info("------------------");
 		model.addAttribute("id",result.getId());
 		model.addAttribute("name",result.getUserName());
 		model.addAttribute("mobilePhone",result.getMobilePhone());
+		model.addAttribute("userBase",result);
+
 		return "index";
 	}
 

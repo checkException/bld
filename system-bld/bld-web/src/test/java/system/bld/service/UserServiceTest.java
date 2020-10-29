@@ -1,15 +1,10 @@
 package system.bld.service;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import system.bld.AppTest;
 import system.bld.model.UserBase;
-
-import static org.junit.Assert.*;
+import system.bld.utils.ExcelOperatorUtil;
 
 
 public class UserServiceTest extends AppTest{
@@ -25,7 +20,14 @@ public class UserServiceTest extends AppTest{
 	public void getUserById() throws Exception {
 		UserBase userBase=userService.getUserById(1L);
 
-		System.out.println("---------------".concat(userBase.getMobilePhone()));
+		if(userBase!=null){
+			System.out.println("---------------".concat(userBase.getMobilePhone()));
+		}
+
 	}
 
+	@Test
+	public void excelOperator(){
+		ExcelOperatorUtil.importExcel();
+	}
 }

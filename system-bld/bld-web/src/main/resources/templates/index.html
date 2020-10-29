@@ -3,12 +3,13 @@
 <!--suppress ALL-->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <span th:include="/common/head :: commonHead('后台首页')"></span>
+    <span th:include="common/head :: commonHead('后台首页')"></span>
 </head>
 <body>
 <h2>测试页面</h2>
 <p th:text="'用户ID：' + ${id}"/>
-<p th:text="'openID：' + ${name}"/>
+<p th:text="'name：' + ${name}"/>
 <p th:text="'用户手机：' + ${mobilePhone}"/>
+<p th:text="'昵称：' + ${userBase.nickName}"/>
 </body>
 </html>
