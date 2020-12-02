@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bld-api" />
-        <module name="bld-common" />
         <module name="bld-service" />
         <module name="bld-web" />
       </profile>

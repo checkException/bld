@@ -1,5 +1,6 @@
 package system.bld.utils;
 
+import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -21,25 +22,29 @@ import java.util.List;
  */
 public class DatesUtil {
 
-	public static void main(String[] args) {
-/*
+	/*public static void main(String[] args) {
+*//*
 
 		Long res=weekend("2019-12-1 13:11:00","2020-01-20 13:11:06",1);
 		System.out.println(res);
-*/
+*//*
 
-		System.out.println(Math.abs(DateUtil.parse("2020-10-28 16:30:14").getTime() - new Date().getTime()));
+        System.out.println(DateUtil.offsetDay(new Date(),-200));
+        System.out.println(DateUtil.offsetDay(new Date(),-14));
 
-		System.out.println(DateUtil.parse("2020-10-28 18:22:14").compareTo(DateUtil.offsetMinute(new Date(),30))>0);
+        System.out.println(DateUtil.between(DateUtil.parse("2020-11-12 14:41:37"),DateUtil.offsetSecond(DateUtil.beginOfDay(new Date()),-1), DateUnit.DAY));
+        //System.out.println(Math.abs(DateUtil.parse("2020-10-28 16:30:14").getTime() - new Date().getTime()));
+
+		//System.out.println(DateUtil.parse("2020-10-28 18:22:14").compareTo(DateUtil.offsetMinute(new Date(),30))>0);
 		//System.out.println(DateUtil.date(new Date()));
 		//
 		//List<Date> list= startMonthList(DateUtil.parse("2019-12-1 13:11:00"),DateUtil.parse("2020-01-20 13:11:06"),"14:10:11");
-		/*System.out.println("-------------------------------");
+		*//*System.out.println("-------------------------------");
 		//List<Date> endMonthList= endMonthList(DateUtil.parse("2019-12-1 13:11:00"),DateUtil.parse("2020-10-31 13:11:06"),"13:10:11");
 		System.out.println("-------------------------------");
 		getDayOfWeekWithinDateInterval(DateUtil.parse("2019-12-1 13:11:00"),DateUtil.parse("2020-10-31 13:11:06"),5);
-*/
-	}
+*//*
+	}*/
 
 	/**
 	 * 给定时间段和星期几，计算该时间段内共有多少个给定的星期几
@@ -116,7 +121,13 @@ public class DatesUtil {
 		return dateResult;
 	}
 
-
+    /**
+     * 获取给定时间内的月初
+     * @param start
+     * @param end
+     * @param timeStr
+     * @return
+     */
 	public static List<Date> startMonthList(Date start, Date end, String timeStr){
 
 		List<Date> dateList=new ArrayList<>();
@@ -142,6 +153,13 @@ public class DatesUtil {
 
 	}
 
+    /**
+     * 获取给定时间内的月末
+     * @param start
+     * @param end
+     * @param timeStr
+     * @return
+     */
 	public static List<Date> endMonthList(Date start, Date end, String timeStr){
 		List<Date> dateList=new ArrayList<>();
 		//月初

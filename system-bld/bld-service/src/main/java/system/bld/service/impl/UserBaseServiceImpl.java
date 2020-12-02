@@ -20,12 +20,12 @@ public class UserBaseServiceImpl implements UserBaseService {
 	@Autowired
 	UserBaseDao userBaseDao;
 
-	/**
-	 * 查询 根据用户id
-	 *
-	 * @param id
-	 * @return
-	 */
+    /**
+     * 查询 根据用户id
+     *
+     * @param id
+     * @return
+     */
 	@Override
 	public UserBase queryUserById(Long id) {
 		return userBaseDao.selectByPrimaryKey(id);

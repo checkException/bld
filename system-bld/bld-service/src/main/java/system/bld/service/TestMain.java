@@ -24,14 +24,14 @@ import java.util.List;
  * Description:
  */
 public class TestMain {
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		//dateTest();
 
 		//keyWordMacth();
 
 		integerTest();
- 	}
+ 	}*/
 
 	/**
 	 * 时间格式测试
@@ -48,7 +48,7 @@ public class TestMain {
 		System.out.println(490/100);
 
 		System.out.println(DateUtil.betweenDay(new Date(), DateUtil.parse("2020-07-03 23:59:59"), false));
-		System.out.println(DateUtil.between(new Date(), DateUtil.parse("2020-07-03 23:59:59"), DateUnit.DAY, false));
+		System.out.println(DateUtil.between(new Date(), DateUtil.parse("2020-07-03 23:59:59"), DateUnit.DAY));
 
 		System.out.println(DateUtil.parse("2020-07","yyyy-MM"));
 		System.out.println(DateUtil.parse(DateUtil.offsetDay(new Date(),-1).toDateStr(),"yyyyy-MM-dd"));

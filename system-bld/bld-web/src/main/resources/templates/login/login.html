@@ -3,7 +3,7 @@
 <!--suppress ALL-->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <span th:include="/common/head :: commonHead('用户登录')"></span>
+    <span th:include="common/head :: commonHead('用户登录')"></span>
     <link th:href="@{/lib/h-ui.admin/css/H-ui.login.css}" rel="stylesheet" type="text/css" />
 
 </head>
@@ -43,7 +43,7 @@
         </form>
     </div>
 </div>
-<span th:include="/common/footer::footer"></span>
+<span th:include="common/footer::footer"></span>
 <script type="text/javascript" >
 
 </script>

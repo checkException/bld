@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>bld-web</artifactId>
-
+    <version>1.0-SNAPSHOT</version>
     <name>bld-web</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
@@ -33,12 +33,12 @@
         <!--引入依赖模块-->
         <dependency>
             <groupId>system.bld</groupId>
-            <artifactId>bld-service</artifactId>
+            <artifactId>bld-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>system.bld</groupId>
-            <artifactId>bld-common</artifactId>
+            <artifactId>bld-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
@@ -67,8 +67,9 @@
             <artifactId>spring-data-elasticsearch</artifactId>
         </dependency>-->
     </dependencies>
-
+    <packaging>jar</packaging>
     <build>
+        <!--<finalName>system-bld</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -81,7 +82,15 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <fork>true</fork>
                     <mainClass>system.bld.SystemApplication</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>

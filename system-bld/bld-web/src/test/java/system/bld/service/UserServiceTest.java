@@ -28,6 +28,6 @@ public class UserServiceTest extends AppTest{
 
 	@Test
 	public void excelOperator(){
-		ExcelOperatorUtil.importExcel();
+		//ExcelOperatorUtil.importExcel();
 	}
 }

@@ -54,7 +54,7 @@ public class AesUtils {
 		return encrypt;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Map<String,Object> map=new HashMap<>();
 
 		String encrypt=encrypt(publicKey, Dict.create().set("name","litao").set("age","26"));
@@ -62,5 +62,5 @@ public class AesUtils {
 		System.out.println(encrypt);
 
 		System.out.println("-- ".concat(decrypt(publicKey,encrypt)));
-	}
+	}*/
 }

@@ -22,9 +22,9 @@ import java.util.Map;
  */
 public class FileReaderTest {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		writeFile();
-	}
+	}*/
 
 	public static void inportFile(){
 		FileReader fileReader = new FileReader("D:\\goodsselectconfig.csv");
