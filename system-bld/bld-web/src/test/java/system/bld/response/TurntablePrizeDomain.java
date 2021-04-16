@@ -1,4 +1,4 @@
-package system.bld.bean;
+package system.bld.response;
 
 public class TurntablePrizeDomain {
 

@@ -4,8 +4,12 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.ReUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.dfa.WordTree;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang.StringEscapeUtils;
 import system.bld.model.UserBase;
 
 import java.math.BigDecimal;
@@ -24,14 +28,80 @@ import java.util.List;
  * Description:
  */
 public class TestMain {
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
+        System.out.println(false&&false);
 
-		//dateTest();
+        System.out.println(DateUtil.endOfMonth(new Date()));
 
-		//keyWordMacth();
+       System.out.println(1615969007831L/1000L);
+       System.out.println(System.currentTimeMillis());
 
-		integerTest();
- 	}*/
+        System.out.println(new BigDecimal(0)
+                .divide(new BigDecimal(100)));
+
+        //System.out.println("9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972,9879972".split(",").length);
+
+        System.out.println(ReUtil.isMatch("^(?![0-9]+$)[0-9A-Za-z-]{6,20}$", "U-asdasdasdas"));
+
+        String object="hongmi/model1/1/100";
+
+        String[] objectArr=object.split("/");
+
+        int olength=objectArr.length;
+        System.out.println(object);
+        String value="".concat("/").concat("").concat("/").concat("/1");
+
+        String [] valueArr=value.split("/");
+        int vlength=valueArr.length;
+        System.out.println(value);
+
+        if(vlength==olength){
+            boolean isEqual=true;
+            for (int i = 0; i < vlength; i++) {
+                if(StrUtil.isNotBlank(valueArr[i])&&StrUtil.isNotBlank(objectArr[i])){
+                    if(valueArr[i].equals(objectArr[i])){
+                    }else{
+                        isEqual=false;
+                        break;
+                    }
+                }else if(StrUtil.isBlank(valueArr[i])&&StrUtil.isNotBlank(objectArr[i])){
+                }else{
+                    isEqual=false;
+                    break;
+                }
+            }
+            if(isEqual){
+                System.out.println("----------- match ok ------------------");
+            }else{
+                System.out.println("----------- no ------------------");
+            }
+        }else if (vlength<olength){
+
+            boolean isEqual=true;
+            for (int i = 0; i < vlength; i++) {
+                if(StrUtil.isNotBlank(valueArr[i])&&StrUtil.isNotBlank(objectArr[i])){
+                    if(valueArr[i].equals(objectArr[i])){
+                    }else{
+                        isEqual=false;
+                        break;
+                    }
+                }else if(StrUtil.isBlank(valueArr[i])&&StrUtil.isNotBlank(objectArr[i])){
+                }else{
+                    isEqual=false;
+                    break;
+                }
+            }
+            if(isEqual){
+                System.out.println("----------- match ok ------------------");
+            }else{
+                System.out.println("----------- no ------------------");
+            }
+
+        }else{
+            System.out.println("----------- no ------------------");
+        }
+
+    }
 
 	/**
 	 * 时间格式测试

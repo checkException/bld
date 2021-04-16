@@ -22,4 +22,11 @@ public interface UserDao extends BaseMapper<UserBase>{
 	 * @return
 	 */
 	UserBase getUserById(Long id);
+
+    /**
+     *
+     * @param userName
+     * @return
+     */
+	UserBase getUserByUserName(String userName);
 }

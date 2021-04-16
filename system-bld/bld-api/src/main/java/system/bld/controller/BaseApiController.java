@@ -1,5 +1,7 @@
 package system.bld.controller;
 
+import com.github.pagehelper.Page;
+import system.bld.response.APIPageResponse;
 import system.bld.response.APIResponse;
 
 /**
@@ -13,8 +15,28 @@ import system.bld.response.APIResponse;
  */
 public class BaseApiController {
 
+
 	protected APIResponse sucess(Object o){
 
 		return new APIResponse(200,"请求成功",o);
 	}
+
+    /**
+     *
+     * @param page
+     * @return
+     */
+    protected APIPageResponse sucessPage(Page page){
+
+        APIPageResponse response=new APIPageResponse(200,"请求成功",page.getResult());
+
+        response.setPages(page.getPages());
+
+        response.setTotalCount(page.getTotal());
+
+        response.setCurrentPages(page.getPageNum());
+
+        return response;
+    }
+
 }

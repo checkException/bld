@@ -19,4 +19,10 @@
     <select id="getUserById" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select id,user_name,nick_name,mobile_phone from user_base where id=#{id,jdbcType=INTEGER}
     </select>
+
+    <select id="getUserByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select id,user_name,nick_name,mobile_phone
+        from user_base
+        where user_name=#{userName,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -16,6 +16,7 @@ http://120.27.245.71:8090/api/login/submit
 注意：如果手动修改过生成的文件，再次生成是会覆盖，请修改目录 或者备份
 --            ---------------------------------------------------------------------------
 
-
-
+-- 项目永久启动方式
+nohup java -jar bld-web-1.0-SNAPSHOT.jar > system.log 2>&1 &
+nohup java -jar system-api.jar --spring.profiles.active=test > api.log 2>&1 &
 

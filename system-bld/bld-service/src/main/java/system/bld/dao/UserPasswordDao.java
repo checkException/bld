@@ -43,4 +43,11 @@ public interface UserPasswordDao {
      * @mbg.generated
      */
     int updateByPrimaryKey(UserPassword record);
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    UserPassword selectByUserId(Long userId);
 }

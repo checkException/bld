@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import system.bld.bean.TurntablePrizeDomain;
+import system.bld.response.TurntablePrizeDomain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +22,22 @@ import java.util.TreeMap;
  */
 public class RandTest {
 	public static void main(String[] args) {
-		for (int i = 0; i < 1000; i++) {
+		/*for (int i = 0; i < 1000; i++) {
 			//drawTest();
-			generatePrizes();
-		}
 
+			generatePrizes();
+		}*/
+        ClassTest();
 	}
+
+	public static  void ClassTest(){
+        Class cls1 = String.class;
+
+        String s = "Hello";
+        Class cls2 = s.getClass();
+
+        System.out.println(cls1==cls2);
+    }
 	public static void drawTest(){
 
 		List<Pair<String, Double>> list = new ArrayList<>();

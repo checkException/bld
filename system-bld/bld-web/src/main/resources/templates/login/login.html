@@ -25,7 +25,7 @@
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input id="verificationcode" class="input-text size-L" type="text" placeholder="验证码" onblur="" onclick="" value="" style="width:150px;"/>
+                    <input id="verificationcode" class="input-text size-L" type="text" placeholder="邀请码" onblur="" onclick="" value="" style="width:150px;"/>
                     <!--<img id="image_v_code" src="login/verificationCode.do"/> <a id="" href="#">看不清，换一张</a>-->
                 </div>
             </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input id="Button_Login-btnInnerEl" name="" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"/>
+                    <input id="Button_Login-btnInnerEl" name="" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;" onclick="vericationForm()"/>
                     <input id="Button_Login-btnIconEl" name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;"/>
                 </div>
             </div>
@@ -45,7 +45,29 @@
 </div>
 <span th:include="common/footer::footer"></span>
 <script type="text/javascript" >
+    function vericationForm(){
+        var i_name=$("#user_name").val();
+        var i_pwd=$("#user_pwd").val();
+        var i_code=$("#verificationcode").val();
 
+        if(i_name==null||i_name==""){
+            var noUser= "账号不能为空";
+            prompt(noUser);
+        }else if(i_pwd==null||i_pwd==""){
+            var noPwd = "密码不能为空";
+            prompt(noPwd);
+        }else if(i_code==null||i_code==""){
+            var noCode = "请输入邀请码";
+            prompt(noCode);
+        }
+
+        alert(1);
+
+    }
+
+    function prompt(data){
+        $("#prompt")[0].innerHTML="<p style='font-size:14px;color:red'>"+data+"</p>";
+    }
 </script>
 </body>
 </html>

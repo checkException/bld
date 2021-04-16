@@ -1,12 +1,18 @@
 package system.bld.service.impl;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import system.bld.dao.UserBaseDao;
 import system.bld.dao.UserDao;
 import system.bld.model.UserBase;
+import system.bld.model.UserPassword;
+import system.bld.request.UserLoginReq;
+import system.bld.response.UserLoginInfoRes;
 import system.bld.service.UserService;
+import system.bld.service.user.UserPasswordService;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,6 +28,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserBase> implements Us
 
 	@Autowired
 	UserDao userDao;
+
+	@Autowired
+    UserPasswordService userPasswordService;
 
 
 	/**
@@ -48,6 +57,35 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserBase> implements Us
 		return userDao.getUserById(userEntity.getId());
 	}
 
+    @Override
+    public UserLoginInfoRes login(UserLoginReq userLoginReq) {
+
+	    if(Integer.valueOf(1).equals(userLoginReq.getLoginType())){
+
+	        UserBase userBase= userDao.getUserByUserName(userLoginReq.getUserName());
+
+            UserPassword userPassword= userPasswordService.queryUserPassword(userBase.getId());
+
+            if(userPassword.getLoginPassword().equals(SecureUtil.md5(userLoginReq.getPassword().concat(userPassword.getLoginPasswordSalt())))){
+                //密码正确
+                UserLoginInfoRes userLoginInfoRes=new UserLoginInfoRes();
+
+                userLoginInfoRes.setUserId(userBase.getId());
+
+                userLoginInfoRes.setPid(userBase.getPid());
+
+                userLoginInfoRes.setUserName(userBase.getNickName());
+
+                userLoginInfoRes.setNickName(userBase.getNickName());
+
+                return userLoginInfoRes;
+            }else{
+                Assert.isTrue(false,"账号密码错误");
+            }
+
+        }
+        return null;
+    }
 
 
 }

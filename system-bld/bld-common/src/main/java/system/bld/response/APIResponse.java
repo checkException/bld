@@ -1,17 +1,20 @@
 package system.bld.response;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
- * 接口结果 bean
+ * 接口结果 response
  * @Author: LiTao
  * @Date: 2020/5/6
  * @Time: 20:16
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-public class APIResponse {
+public class APIResponse implements Serializable {
 
-	public static Integer SUCESS=200;
+    private static final long serialVersionUID = 2028878921262581399L;
+    public static Integer SUCESS=200;
 
 	public static Integer FAIL=9999;
 
@@ -32,22 +35,42 @@ public class APIResponse {
 
 
 	public APIResponse fail(){
-		return new APIResponse(FAIL,"失败",null);
+        this.code=FAIL;
+        this.msg="失败";
+        return this;
 	}
 
 	public APIResponse fail(Integer code){
-		return new APIResponse(code,"失败",null);
+	    this.code=code;
+	    this.msg="失败";
+        return this;
 	}
 
 	public APIResponse ok(){
-		return new APIResponse(SUCESS,"成功",null);
+        this.code=SUCESS;
+        this.msg="成功";
+        return this;
 	}
 
 	public APIResponse ok(Integer code){
-		return new APIResponse(code,"成功",null);
+        this.code=code;
+        this.msg="成功";
+        return this;
 	}
 
-	public APIResponse(Integer code, String msg, Object data) {
+    public boolean isSuccess() {
+        return Integer.valueOf(200).equals(this.code);
+    }
+
+   /* public static <T> APIResponse<T> success(T data) {
+        return new APIResponse(data);
+    }*/
+
+
+    public APIResponse() {
+    }
+
+    public APIResponse(Integer code, String msg, Object data) {
 		this.code = code;
 		this.msg = msg;
 		this.data = data;

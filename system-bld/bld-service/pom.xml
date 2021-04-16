@@ -17,6 +17,7 @@
         <maven.compiler.target>1.7</maven.compiler.target>
         <mybatisplus-spring-boot-starter.version>1.0.5</mybatisplus-spring-boot-starter.version>
         <mybatisplus.version>2.1.8</mybatisplus.version>
+        <pagehelper.version>1.2.5</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -60,6 +61,14 @@
             <version>${mybatisplus.version}</version>
         </dependency>
         <!-- mybatis-plus end -->
+
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+
+
 
         <!-- 引入Druid依赖，阿里巴巴所提供的数据源 -->
         <dependency>
@@ -156,7 +165,7 @@
                     <version>3.0.0</version>
                 </plugin>
 
-                <!-- 自动生产 xml dao bean 文件 插件-->
+                <!-- 自动生产 xml dao response 文件 插件-->
                 <!--<plugin>
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -200,7 +209,7 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <!-- 自动生产 xml dao bean 文件 插件-->
+            <!-- 自动生产 xml dao response 文件 插件-->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>

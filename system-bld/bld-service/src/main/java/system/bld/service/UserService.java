@@ -2,6 +2,8 @@ package system.bld.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import system.bld.model.UserBase;
+import system.bld.request.UserLoginReq;
+import system.bld.response.UserLoginInfoRes;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,4 +30,10 @@ public interface UserService extends IService<UserBase> {
 	 */
 	UserBase getUserById(Long id);
 
+    /**
+     * 登录
+     * @param userLoginReq
+     * @return
+     */
+    UserLoginInfoRes login(UserLoginReq userLoginReq);
 }

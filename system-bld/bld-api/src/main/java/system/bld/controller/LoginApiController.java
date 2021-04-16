@@ -6,14 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import system.bld.model.UserBase;
+import system.bld.request.UserLoginReq;
 import system.bld.response.APIResponse;
+import system.bld.response.UserLoginInfoRes;
 import system.bld.service.RedisService;
 import system.bld.service.UserBaseService;
+import system.bld.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -28,20 +33,25 @@ import java.util.List;
 @RestController
 @RequestMapping("/login")
 public class LoginApiController extends BaseApiController {
+
 	private static final Logger log= LoggerFactory.getLogger(BaseApiController.class);
 
 	@Autowired
 	UserBaseService userBaseService;
 
+	UserService userBase;
+
 	@Autowired
     RedisService redisService;
 
 
-	@RequestMapping("/submit")
-	public APIResponse loginSubmit(HttpServletRequest request, Model model){
-		log.info("user login ");
-		UserBase userBase= userBaseService.queryUserById(1L);
-		return sucess(userBase);
+	@RequestMapping("/login")
+	public APIResponse loginSubmit(HttpServletRequest request,@RequestBody @Valid UserLoginReq userLoginReq){
+		//log.info("user login ");
+
+        UserLoginInfoRes userLoginInfoRes= userBase.login(userLoginReq);
+
+		return sucess(userLoginInfoRes);
 	}
 
     /*@RequestMapping("/setRedis/{value}")
