@@ -9,9 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import system.bld.dao.UserBaseDao;
+import system.bld.enums.ErrorCodeEnum;
 import system.bld.model.UserBase;
 import system.bld.request.UserBaseReq;
 import system.bld.service.UserBaseService;
+import system.bld.service.thirdparty.GaoDeServiceImpl;
+import system.common.utils.AssertUtils;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -34,10 +37,15 @@ import java.util.Map;
 @Service
 public class UserBaseServiceImpl implements UserBaseService {
     private static final Logger logger = LoggerFactory.getLogger(UserBaseServiceImpl.class);
+
 	@Autowired
 	UserBaseDao userBaseDao;
 
-    private static final FileReader reader = new FileReader("D:\\action.js");
+    @Autowired
+    GaoDeServiceImpl gaoDeService;
+
+
+    //private static final FileReader reader = new FileReader("D:\\action.js");
 
     /*static {
         if(reader == null ){
@@ -69,43 +77,13 @@ public class UserBaseServiceImpl implements UserBaseService {
     @Override
     public Page<UserBase> queryListPage(UserBaseReq userBaseReq) {
 
-        logger.info("UserBaseServiceImpl.queryListPage,userBaseReq:{}",userBaseReq);
-
-        ScriptEngine engine = new ScriptEngineManager()
-                .getEngineByName("JavaScript");
-        logger.info("UserBaseServiceImpl.queryListPage,1");
-        Object object=null;
-        try {
-            engine.eval(reader.getReader());
-            logger.info("UserBaseServiceImpl.queryListPage,2");
-            if (engine instanceof Invocable) {
-                Invocable invocable = (Invocable) engine;
-                /*JavaScriptInterface executeMethod = invocable
-                        .getInterface(JavaScriptInterface.class);
-                return executeMethod.getEncryption(pwd, user, random);*/
-                logger.info("UserBaseServiceImpl.queryListPage,3");
-                object=invocable.invokeFunction("getEncryption","litao123","litao123","123");
-            }
-            logger.info("out UserBaseServiceImpl.queryListPage,object:{}",object);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (null != reader) {
-               /* try {
-                    reader.getReader().close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-            }
-        }
-
         UserBase userBase=new UserBase();
 
         BeanUtil.copyProperties(userBaseReq,userBase);
 
-        PageHelper.startPage(userBaseReq.getPageNum(),userBaseReq.getPageSize());
-
         Map<String,Object> params=BeanUtil.beanToMap(userBaseReq);
+
+        PageHelper.startPage(userBaseReq.getPageNum(),userBaseReq.getPageSize());
 
         List<UserBase> list= userBaseDao.selectBySelecter(params);
 
@@ -121,5 +99,58 @@ public class UserBaseServiceImpl implements UserBaseService {
         userBase.setCreateTime(new Date());
         userBase.setModifyTime(new Date());
         return userBaseDao.insert(userBase)>0?Boolean.TRUE:Boolean.FALSE;
+    }
+
+    /**
+     * 修改
+     *
+     * @param userBase
+     * @return
+     */
+    @Override
+    public Boolean editUserBase(UserBase userBase) {
+
+        logger.info("editUserBase.userBase:{}",userBase);
+
+        AssertUtils.isNotNull(userBase.getId(), ErrorCodeEnum.ILLEGAL_ARGUMENT);
+        AssertUtils.isNotBlank(userBase.getUserName(), ErrorCodeEnum.ILLEGAL_ARGUMENT);
+
+        userBase.setModifyTime(new Date());
+
+        return userBaseDao.updateSelectiveByPrimaryKey(userBase)>0?Boolean.TRUE:Boolean.FALSE;
+    }
+
+    /**
+     * java 读取 javaScript测试
+     */
+    public void readerJavaScript(){
+
+        /*ScriptEngine engine = new ScriptEngineManager()
+                .getEngineByName("JavaScript");
+        logger.info("UserBaseServiceImpl.queryListPage,1");
+        Object object=null;
+        try {
+            engine.eval(reader.getReader());
+            logger.info("UserBaseServiceImpl.queryListPage,2");
+            if (engine instanceof Invocable) {
+                Invocable invocable = (Invocable) engine;
+                JavaScriptInterface executeMethod = invocable
+                        .getInterface(JavaScriptInterface.class);
+                return executeMethod.getEncryption(pwd, user, random);
+                logger.info("UserBaseServiceImpl.queryListPage,3");
+                object=invocable.invokeFunction("getEncryption","litao123","litao123","123");
+            }
+            logger.info("out UserBaseServiceImpl.queryListPage,object:{}",object);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != reader) {
+                try {
+                    reader.getReader().close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }*/
     }
 }

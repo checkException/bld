@@ -1,14 +1,23 @@
 package system.bld.interceptor;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import system.bld.annotations.Login;
+import system.bld.constans.ApplicationProperties;
 import system.bld.enums.LoginEnum;
+import system.bld.request.base.MyToken;
+import system.bld.utils.AesUtils;
+import system.bld.utils.IPUtils;
+import system.common.utils.UUIDUtils;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,7 +44,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		log.info("LoginInterceptor enter ..... url:{}",request.getRequestURI());
+        //塞入 进程 唯一id
+        MDC.put("apiTraceId", UUIDUtils.randomUUID());
+
+        log.info("LoginInterceptor enter ..... url:{}",request.getRequestURI());
 
 		if(handler instanceof HandlerMethod){
 			Login login= ((HandlerMethod) handler).getMethodAnnotation(Login.class);
@@ -44,21 +56,34 @@ public class LoginInterceptor implements HandlerInterceptor{
 				//免校验 跳过验证
 				if(login.login()== LoginEnum.Skip){
 					return true;
-				}else {
-					//判断用户是否登录 采用token方式
-
-					log.info(" interceptor 需要校验 ...!");
-					String rootPath=request.getRequestURI().replace(request.getServletPath(),"/login");
-					response.sendRedirect(rootPath);
-					return false;
 				}
 			}
 
+            String authToken="";
+            //取token
+            Cookie[] cookies = request.getCookies();
+            if (ObjectUtil.isNotNull(cookies) && cookies.length > 0) {
+                for (Cookie cookie : cookies) {
+                    if ("authToken".equals(cookie.getName())) {
+                        authToken=cookie.getValue();
+                        break;
+                    }
+                }
+            }
+
+            if(StrUtil.isNotEmpty(authToken)&&isLogin(authToken,request)){
+                return true;
+            }
+
 		}
 
+        log.info(" 用户未登录 ip:{}", IPUtils.getIpAddress(request));
+        //判断用户是否登录 采用token方式
 
-		log.info(" interceptor ....");
-		return true;
+        String rootPath=request.getRequestURI().replace(request.getServletPath(),"/login");
+        response.sendRedirect(rootPath);
+
+		return false;
 	}
 
 	/**
@@ -87,4 +112,24 @@ public class LoginInterceptor implements HandlerInterceptor{
 	public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
 
 	}
+
+    private boolean isLogin(String content,HttpServletRequest request){
+        String json= AesUtils.decrypt(ApplicationProperties.USER_LOGIN_AES_KEY_WEB,content);
+
+        if(json==null || "".equals(json)){
+            return false;
+        }
+        MyToken myToken= JSON.parseObject(json,MyToken.class);
+
+        if(myToken!=null && ObjectUtil.isNotNull(myToken.getUserId())){
+
+            request.setAttribute("userId",myToken.getUserId());
+
+            request.setAttribute("userName",myToken.getUserName());
+
+            return true;
+        }
+
+        return  false;
+    }
 }

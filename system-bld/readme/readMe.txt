@@ -1,13 +1,15 @@
 # 打开页面的跳转地址
 http://localhost:8060/bld/home/index
-http://localhost:8060/bld/login
+http://localhost:8090/bld/login
 
 阿里云服务器页面地址
 http://120.27.245.71:8080/bld/home/index
+http://120.27.245.71:8070/bld/home/index
 接口地址
 http://120.27.245.71:8090/api/login/submit
 
-
+用户列表
+http://120.27.245.71:8090/user/list
 
 
 -- 利用mybatis-generator 生产 xml dao bean等配置文件的方法
@@ -17,6 +19,6 @@ http://120.27.245.71:8090/api/login/submit
 --            ---------------------------------------------------------------------------
 
 -- 项目永久启动方式
-nohup java -jar bld-web-1.0-SNAPSHOT.jar > system.log 2>&1 &
-nohup java -jar system-api.jar --spring.profiles.active=test > api.log 2>&1 &
+nohup java -jar bld-web-1.0-SNAPSHOT.jar --spring.profiles.active=prod > system.log 2>&1 &
+nohup java -jar system-api.jar --spring.profiles.active=prod > api.log 2>&1 &
 

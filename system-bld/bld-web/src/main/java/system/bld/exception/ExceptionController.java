@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import system.bld.annotations.Login;
+import system.bld.enums.LoginEnum;
 import system.bld.response.APIResponse;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +58,7 @@ public class ExceptionController implements ErrorController {
 	 * @param request
 	 * @return
 	 */
+    @Login(login= LoginEnum.Skip)
 	@RequestMapping(value = "")
 	@ResponseBody
 	public APIResponse error(HttpServletRequest request) {
@@ -73,6 +76,7 @@ public class ExceptionController implements ErrorController {
 	 * @param response
 	 * @return
 	 */
+    @Login(login= LoginEnum.Skip)
 	@RequestMapping(produces = "text/html",value = "")
 	public ModelAndView errorHtml500(HttpServletRequest request,
 									 HttpServletResponse response) {

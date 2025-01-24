@@ -313,7 +313,7 @@ public class UserBaseReq extends BaseReq {
      *
      * @mbg.generated
      */
-    @Override
+   /* @Override
     public String toString() {
         return "UserBaseReq{" +
                 "id=" + id +
@@ -322,10 +322,10 @@ public class UserBaseReq extends BaseReq {
                 ", nickName='" + nickName + '\'' +
                 ", type=" + type +
                 ", status=" + status +
-                ", createTime=" + createTime.toString() +
-                ", modifyTime=" + modifyTime.toString() +
-                ", startTime=" + startTime.toString() +
-                ", endTime=" + endTime.toString() +
+                ", createTime=" + createTime==null?"":createTime.toString() +
+                ", modifyTime=" + modifyTime==null?"":modifyTime.toString() +
+                ", startTime=" + startTime==null?"":startTime.toString() +
+                ", endTime=" + endTime==null?"":endTime.toString() +
                 '}';
-    }
+    }*/
 }

@@ -1,7 +1,5 @@
-
-<!DOCTYPE html>
 <!--suppress ALL-->
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <span th:include="common/head :: commonHead('用户登录')"></span>
     <link th:href="@{/lib/h-ui.admin/css/H-ui.login.css}" rel="stylesheet" type="text/css" />
@@ -9,12 +7,12 @@
 </head>
 <body>
 <div class="loginWraper">
-    <div id="loginform" class="loginBox">
-        <form class="form form-horizontal" action="index.html" method="post">
+    <div class="loginBox">
+        <form  id="loginform" class="form form-horizontal" action="/login/login" method="post">
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
                 <div class="formControls col-xs-8">
-                    <input id="user_name" name="name" type="text" placeholder="账户" class="input-text size-L"/>
+                    <input id="user_name" name="userName" type="text" placeholder="账户" class="input-text size-L" value="litao123"/>
                 </div>
             </div>
             <div class="row cl">
@@ -25,21 +23,22 @@
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input id="verificationcode" class="input-text size-L" type="text" placeholder="邀请码" onblur="" onclick="" value="" style="width:150px;"/>
+                    <input id="verificationcode" name="invateCode" class="input-text size-L" type="text" placeholder="邀请码" onblur="" onclick="" value="1234" style="width:150px;"/>
                     <!--<img id="image_v_code" src="login/verificationCode.do"/> <a id="" href="#">看不清，换一张</a>-->
                 </div>
             </div>
             <div class="row cl">
-                <div id="prompt" class="formControls col-xs-8 col-xs-offset-3" >
-
+                <div id="prompt" class="formControls col-xs-8 col-xs-offset-3" style="font-size:14px;color:red">
                 </div>
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input id="Button_Login-btnInnerEl" name="" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;" onclick="vericationForm()"/>
+                    <input id="Button_Login-btnInnerEl" name="" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;" onclick="javascript:vericationForm()"/>
                     <input id="Button_Login-btnIconEl" name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;"/>
                 </div>
             </div>
+
+            <input id="loginType" name="loginType" type="hidden" value="1"/>
         </form>
     </div>
 </div>
@@ -59,14 +58,14 @@
         }else if(i_code==null||i_code==""){
             var noCode = "请输入邀请码";
             prompt(noCode);
+        }else{
+            $("#loginform").submit();
         }
-
-        alert(1);
 
     }
 
     function prompt(data){
-        $("#prompt")[0].innerHTML="<p style='font-size:14px;color:red'>"+data+"</p>";
+        $("#prompt").text(data);
     }
 </script>
 </body>

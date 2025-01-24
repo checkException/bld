@@ -29,4 +29,12 @@ public interface UserBaseService {
     Page<UserBase> queryListPage(UserBaseReq userBaseReq);
 
 	Boolean addUserBase(UserBase userBase);
+
+    /**
+     * 修改
+     * @param userBase
+     * @return
+     */
+	Boolean editUserBase(UserBase userBase);
+
 }

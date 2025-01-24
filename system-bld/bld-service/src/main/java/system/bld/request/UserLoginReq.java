@@ -30,7 +30,6 @@ public class UserLoginReq implements Serializable {
     /**
      * 登录类型- 1 账号密码；2 手机号；
      */
-    @NotEmpty
     private Integer loginType;
 
     /**

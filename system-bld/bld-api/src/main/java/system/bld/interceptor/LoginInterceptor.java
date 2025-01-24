@@ -1,5 +1,7 @@
 package system.bld.interceptor;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
@@ -10,10 +12,16 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import system.bld.annotations.Login;
+import system.bld.constans.ApplicationProperties;
+import system.bld.enums.ErrorCodeEnum;
 import system.bld.enums.LoginEnum;
+import system.bld.request.base.MyToken;
+import system.bld.utils.AesUtils;
 import system.bld.utils.IPUtils;
+import system.common.utils.ResultHandle;
 import system.common.utils.UUIDUtils;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -47,6 +55,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 
 		log.info("LoginInterceptor enter ..... url:{}",request.getRequestURI());
 
+        if ("OPTIONS".equals(request.getMethod().toUpperCase())) {
+            return true;
+        }
+
 		if(handler instanceof HandlerMethod){
 			Login login= ((HandlerMethod) handler).getMethodAnnotation(Login.class);
 
@@ -54,19 +66,39 @@ public class LoginInterceptor implements HandlerInterceptor{
 				//免校验 跳过验证
 				if(login.login()== LoginEnum.Skip){
 					return true;
-				}else {
-					//判断用户是否登录 采用token方式
-
-					log.info(" interceptor 需要校验 ...!");
-					//取token
-                    String token= request.getHeader("token");
-
-                    if(StrUtil.isBlank(token)){
-                        log.info(" 用户未登录 ip:{}", IPUtils.getIpAddress(request));
-                    }
-					return true;
 				}
 			}
+
+            //判断用户是否登录 采用token方式
+
+            log.info(" interceptor 需要校验身份 ...!");
+
+            String authToken="";
+            //取token
+            Cookie[] cookies = request.getCookies();
+            if (ObjectUtil.isNotNull(cookies) && cookies.length > 0) {
+                for (Cookie cookie : cookies) {
+                    if ("authToken".equals(cookie.getName())) {
+                        authToken=cookie.getValue();
+
+                        break;
+                    }
+                }
+            }
+
+            if(StrUtil.isEmpty(authToken)){
+                //从header中取
+                authToken=getTokenFromHeader(request);
+            }
+
+            if(StrUtil.isNotEmpty(authToken)&&isLogin(authToken,request)){
+                return true;
+            }
+
+            log.info(" 用户未登录 ip:{}", IPUtils.getIpAddress(request));
+
+            processAjaxResponse(response, ResultHandle.fail(ErrorCodeEnum.NOT_LOGIN));
+            return false;
 
 		}
 
@@ -75,6 +107,37 @@ public class LoginInterceptor implements HandlerInterceptor{
 		return true;
 	}
 
+    /**
+     * 从header中获取
+     * @param request
+     * @return
+     */
+	private String getTokenFromHeader(HttpServletRequest request){
+
+	    String authToken= request.getHeader("authToken");
+
+	    return authToken;
+    }
+
+	private boolean isLogin(String content,HttpServletRequest request){
+        String json= AesUtils.decrypt(ApplicationProperties.USER_LOGIN_AES_KEY,content);
+
+        if(json==null || "".equals(json)){
+            return false;
+        }
+        MyToken myToken= JSON.parseObject(json,MyToken.class);
+
+        if(myToken!=null && ObjectUtil.isNotNull(myToken.getUserId())){
+
+            request.setAttribute("userId",myToken.getUserId());
+
+            request.setAttribute("userName",myToken.getUserName());
+
+            return true;
+        }
+
+        return  false;
+    }
 	/**
 	 * 该方法的执行时机是，当某个 URL 已经匹配到对应的 Controller 中的某个方法，
 	 * 且在执行完了该方法，但是在 DispatcherServlet 视图渲染之前。所以在这个方法中有个 ModelAndView 参数，可以在此做一些修改动作。
@@ -99,7 +162,8 @@ public class LoginInterceptor implements HandlerInterceptor{
 	 */
 	@Override
 	public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-
+        /*httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", httpServletResponse.getHeader("Origin"));*/
 	}
 
     private void processAjaxResponse(HttpServletResponse response, Object result) {
@@ -107,6 +171,9 @@ public class LoginInterceptor implements HandlerInterceptor{
         response.setContentType("text/plain; charset=utf-8");
 
         response.setCharacterEncoding("UTF-8");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
+        response.setHeader("Access-Control-Allow-Origin", response.getHeader("Origin"));
 
         PrintWriter out = null;
 

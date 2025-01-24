@@ -53,4 +53,6 @@ public interface UserBaseDao {
      * @mbg.generated
      */
     int updateByPrimaryKey(UserBase record);
+
+    int updateSelectiveByPrimaryKey(UserBase record);
 }

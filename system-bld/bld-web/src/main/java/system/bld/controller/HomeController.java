@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import system.bld.annotations.Login;
+import system.bld.controller.base.BaseController;
 import system.bld.enums.LoginEnum;
 import system.bld.model.UserBase;
 import system.bld.service.UserBaseService;
 import system.bld.service.UserService;
+import system.bld.service.user.UserLoginLogService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -29,7 +31,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/home")
-public class HomeController {
+public class HomeController extends BaseController{
 	private static final Logger log= LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
@@ -37,32 +39,38 @@ public class HomeController {
 	@Autowired
 	UserBaseService userBaseService;
 
+	@Autowired
+    UserLoginLogService userLoginLogService;
+
+    //@Login(login= LoginEnum.Skip)
 	@RequestMapping("")
-	public String home(HttpServletRequest request, String string, Model model){
+	public String home(HttpServletRequest request,  Model model){
 
-		UserBase result= userService.getUserById(1L);
+	    Long userId=getUserId(request);
 
-
+		UserBase result= userService.getUserById(userId);
 
 		log.info("------------------");
 		model.addAttribute("id",result.getId());
 		model.addAttribute("name",result.getUserName());
 		model.addAttribute("mobilePhone",result.getMobilePhone());
-		return "index";
+		return "main";
 	}
 
 
-	@Login(login= LoginEnum.Skip)
+	//@Login(login= LoginEnum.Skip)
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request, String string, Model model){
+        Long userId=getUserId(request);
 
-		UserBase result= userBaseService.queryUserById(2L);
+		UserBase result= userBaseService.queryUserById(userId);
 		log.info("------------------");
 		model.addAttribute("id",result.getId());
 		model.addAttribute("name",result.getUserName());
 		model.addAttribute("mobilePhone",result.getMobilePhone());
 		model.addAttribute("userBase",result);
 
+		model.addAttribute("loginLogList",userLoginLogService.queryListLimit100());
 		return "index";
 	}
 

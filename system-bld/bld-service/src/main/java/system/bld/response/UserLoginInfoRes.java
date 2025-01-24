@@ -31,6 +31,8 @@ public class UserLoginInfoRes implements Serializable{
      */
     private String nickName;
 
+    private String mobilePhone;
+
     /**
      * token
      */
@@ -67,6 +69,14 @@ public class UserLoginInfoRes implements Serializable{
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 
     public String getAuthToken() {

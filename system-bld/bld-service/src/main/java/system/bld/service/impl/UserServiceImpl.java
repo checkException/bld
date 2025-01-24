@@ -1,11 +1,11 @@
 package system.bld.service.impl;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import system.bld.dao.UserBaseDao;
 import system.bld.dao.UserDao;
 import system.bld.model.UserBase;
 import system.bld.model.UserPassword;
@@ -64,7 +64,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserBase> implements Us
 
 	        UserBase userBase= userDao.getUserByUserName(userLoginReq.getUserName());
 
+            Assert.isTrue(ObjectUtil.isNotNull(userBase),"账号密码错误");
+
             UserPassword userPassword= userPasswordService.queryUserPassword(userBase.getId());
+
+            Assert.isTrue(ObjectUtil.isNotNull(userPassword),"账号密码错误");
 
             if(userPassword.getLoginPassword().equals(SecureUtil.md5(userLoginReq.getPassword().concat(userPassword.getLoginPasswordSalt())))){
                 //密码正确
@@ -76,6 +80,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserBase> implements Us
 
                 userLoginInfoRes.setUserName(userBase.getNickName());
 
+                userLoginInfoRes.setMobilePhone(userBase.getMobilePhone());
+
                 userLoginInfoRes.setNickName(userBase.getNickName());
 
                 return userLoginInfoRes;
@@ -84,6 +90,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserBase> implements Us
             }
 
         }
+        Assert.isTrue(false,"不支持的登录方式");
         return null;
     }
 

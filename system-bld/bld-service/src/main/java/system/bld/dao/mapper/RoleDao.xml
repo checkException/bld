@@ -13,6 +13,9 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
+    <sql id="column_List">
+        id, role_name, role_code, `status`, create_time, modify_time
+    </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
@@ -64,4 +67,13 @@
     select id, role_name, role_code, `status`, create_time, modify_time
     from role
   </select>
+
+    <select id="selectListByRoleIds" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select <include refid="column_List" />
+        from role
+        where id in
+        <foreach item="roleId" collection="list" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </select>
 </mapper>

@@ -29,6 +29,7 @@
         <poi.version>4.1.2</poi.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
         <redisson.version>3.5.7</redisson.version>
+        <kisso.version>3.6.13</kisso.version>
     </properties>
 
     <dependencies>
@@ -55,6 +56,11 @@
         <!--引入依赖模块-->
 
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+        <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
@@ -65,6 +71,14 @@
             <artifactId>poi-ooxml</artifactId>
             <version>${poi.version}</version>
         </dependency>
+
+        <!-- kisso begin -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>kisso</artifactId>
+            <version>${kisso.version}</version>
+        </dependency>
+        <!-- kisso end -->
 
         <dependency>
             <groupId>org.apache.commons</groupId>

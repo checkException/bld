@@ -47,5 +47,12 @@ public interface UserRoleDao {
      */
     int updateByPrimaryKey(UserRole record);
 
-
+    /**
+     * 查询用户所属角色列表
+     * @param userId
+     * @return java.util.List<system.bld.model.UserRole>
+     * @author litao
+     * @date 2021/4/19 10:34
+     */
+    List<UserRole> queryListByUserId(Long userId);
 }

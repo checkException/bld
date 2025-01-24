@@ -13,18 +13,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-@Configuration
+//@Configuration
 public class InterceptorConfig extends WebMvcConfigurerAdapter {
 
 	/**
 	 * 默认不拦截/resources/static目录下的资源文件
 	 * @param registry
 	 */
-	@Override
+	/*@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		//addPathPatterns 拦截路径
 		//excludePathPatterns 不拦截路径
-		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/login/*");
-	}
+		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/500","/404","/error");
+        //registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**");
+	}*/
 
 }

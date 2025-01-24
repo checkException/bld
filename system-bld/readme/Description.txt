@@ -2,6 +2,8 @@
     分页功能：详情参考 api/user/list
     日志打印功能：ApiLogAspect/WebLogAspect  aop切如方式 加入线程随机号
 
+CustomSqlOutInterceptor：打印完整的 mybatis日志功能
+
 
 
 

@@ -47,4 +47,11 @@ public interface RoleDao extends BaseMapper<Role> {
      * @mbg.generated
      */
     int updateByPrimaryKey(Role record);
+
+    /**
+     * 跟母角色id获取角色列表
+     * @param list
+     * @return
+     */
+    List<Role> selectListByRoleIds(List<Long> list);
 }
