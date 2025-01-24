@@ -1,0 +1,95 @@
+<!--suppress ALL-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <span th:include="common/head :: commonHead('用户添加')"></span>
+
+</head>
+<body>
+<article class="page-container">
+    <form action="/user/add/submit" method="post" class="form form-horizontal" id="form-user-add">
+        <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>用户名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="userName" name="userName"/>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>手机：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="mobilePhone" name="mobilePhone"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>昵称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" placeholder="" name="nickName" id="nickName"/>
+            </div>
+        </div>
+    </form>
+    <div class="row cl">
+        <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+            <input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onclick="addSubmit()"/>
+        </div>
+    </div>
+</article>
+
+<!--<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}"></script>-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}"></script>
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}"></script>
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $("#form-user-add").validate({
+            rules:{
+                userName:{
+                    required:true,
+                    minlength:2,
+                    maxlength:16
+                },
+                mobilePhone:{
+                    required:true,
+                    isMobile:true,
+                },
+                nickName:{
+                    required:true,
+                },
+
+            },
+            onkeyup:false,
+            focusCleanup:true,
+            success:"valid",
+            submitHandler:function(form){
+                //$(form).ajaxSubmit();
+                var index = parent.layer.getFrameIndex(window.name);
+                //parent.$('.btn-refresh').click();
+                parent.layer.close(index);
+            }
+        });
+    });
+
+
+    function addSubmit(){
+
+        var url="/user/add/submit";
+        Action.callPostService(url,
+            JSON.stringify({
+                userName: $("#userName").val(),
+                mobilePhone: $("#mobilePhone").val(),
+                nickName: $("#nickName").val()
+            }),
+            function(data){
+                if(data.code=="200"){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                }else{
+                    layer.alert("失败")
+                }
+
+            },1
+        )
+    }
+</script>
+</body>
+</html>
