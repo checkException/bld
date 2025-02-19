@@ -3,9 +3,11 @@ package system.bld.controller.base;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
 import system.bld.constans.ApplicationProperties;
 import system.bld.enums.ErrorCodeEnum;
 import system.bld.request.base.MyToken;
+import system.bld.response.APIPageResponse;
 import system.bld.response.APIResponse;
 import system.bld.utils.AesUtils;
 import system.common.utils.ResultHandle;
@@ -73,5 +75,23 @@ public class BaseController {
         MyToken myToken= JSON.parseObject(json,MyToken.class);
 
         return myToken;
+    }
+
+    /**
+     *
+     * @param page
+     * @return
+     */
+    protected APIPageResponse successPage(Page page){
+
+        APIPageResponse response=new APIPageResponse(200,"请求成功",page.getResult());
+
+        response.setPages(page.getPages());
+
+        response.setTotalCount(page.getTotal());
+
+        response.setCurrentPages(page.getPageNum());
+
+        return response;
     }
 }

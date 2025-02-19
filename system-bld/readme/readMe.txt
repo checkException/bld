@@ -4,7 +4,7 @@ http://localhost:8090/bld/login
 
 阿里云服务器页面地址
 http://120.27.245.71:8080/bld/home/index
-http://120.27.245.71:8070/bld/home/index
+http://39.105.200.157:8070/home
 接口地址
 http://120.27.245.71:8090/api/login/submit
 

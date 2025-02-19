@@ -8,10 +8,10 @@ import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author litao
@@ -23,6 +23,19 @@ public class test02 {
 
     public static void main(String[] args){
 
+        try {
+            System.out.println(URLEncoder.encode("哈哈","utf-8"));;
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+        /*List<Long> alist = Arrays.asList(1131753089L,1129904112L,1130213508L);
+        List<Long> blist = Arrays.asList(1129904112L,1130213508L);
+        List<Long> resGoodsList = alist.stream().filter(aueryRes -> !blist.contains(aueryRes)).collect(Collectors.toList());
+        System.out.println(resGoodsList);
+
+        System.out.println(DateUtil.formatDate(DateUtil.offsetDay(new Date(), -1)));*/
+        /*
         Calendar calendar = Calendar.getInstance();
 
         System.out.println(DateUtil.format(calendar.getTime(),"yyyy-MM-dd HH:mm:ss:SSS"));
@@ -39,7 +52,7 @@ public class test02 {
         Map<String,Object> map1 = null;
         System.out.println(MapUtils.isEmpty(map));
         System.out.println(MapUtils.isEmpty(map1));
-
+*/
 
         /*Map<String,Dict> testMap =new HashMap<>();
 
@@ -53,10 +66,10 @@ public class test02 {
         for (Map.Entry<String,Dict> entry:testMap.entrySet()){
             System.out.println(JSON.toJSONString(entry));
         }
-
-        for(int i = 0; i <= 50; i++) {
-            System.out.println(RandomUtil.randomInt(10));
-
-        }*/
+*/
+//        for(int i = 0; i <= 100; i++) {
+//            System.out.println(RandomUtil.randomInt(100));
+//
+//        }
     }
 }
